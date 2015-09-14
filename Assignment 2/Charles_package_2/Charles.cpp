@@ -130,12 +130,30 @@ void Hansel1()
     //niet op een bal
     if (!on_ball())
     {
-      //do a 180 en doe een stap terug
-      turn_left();
-      turn_left();
+      //start checking2
+      turn_right();
       step();
       turn_left();
-      Hansel1();
+      step();
+      if (on_ball())
+      {
+        Hansel1();
+      }
+      if (!on_ball())
+      {
+        turn_right();
+        turn_right();
+        step();
+        step();
+        if (!on_ball())
+        {
+          turn_right();
+        }
+        if (on_ball())
+        {
+          Hansel1();
+        }
+      }
     }
   }
   //wel voor een muur
@@ -144,7 +162,7 @@ void Hansel1()
     turn_left();
     Hansel1();
   }
-    
+}
 }
 void nieuwe_bal_zoeken ()
 {
