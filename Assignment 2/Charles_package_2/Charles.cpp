@@ -132,6 +132,7 @@ void Hansel1()
     {
       //start checking2
       turn_right();
+      turn_right();
       step();
       turn_left();
       step();
