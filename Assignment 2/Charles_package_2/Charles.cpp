@@ -88,9 +88,8 @@ void test ()
 {
     while (!in_front_of_wall())
     {
-
         step();
-    turn_right();
+        turn_right();
 
     while (!in_front_of_wall())
     {
@@ -114,6 +113,44 @@ void test ()
     }
 
     }
+}
+void begin()
+{
+  step();
+  turn_right();
+}
+void putitdown()
+{
+  put_ball();
+  step();
+}
+
+void ass_2()
+{
+  begin();
+  while (!in_front_of_wall())
+  {
+    putitdown();
+  }
+  if (in_front_of_wall())
+  {
+    turn_left();
+    step();
+    if (!on_ball())
+    {
+      turn_left();
+      putitdown();
+    }
+    if (on_ball())
+    {
+      turn_left();
+      turn_left();
+      step();
+      step();
+      turn_right();
+      putitown();
+    }
+  }
 }
 void Hansel1()
 {
@@ -164,6 +201,7 @@ void Hansel1()
     Hansel1();
   }
 }
+
 }
 void nieuwe_bal_zoeken ()
 {
