@@ -115,7 +115,37 @@ void test ()
 
     }
 }
-
+void Hansel1()
+{
+  // niet voor een muur
+  if (!in_front_of_wall())
+  {
+    //en op een bal
+    if (on_ball())
+    {
+      //loop naar voren en check opnieuw
+      step();
+      Hansel1();
+    }
+    //niet op een bal
+    if (!on_ball())
+    {
+      //do a 180 en doe een stap terug
+      turn_left();
+      turn_left();
+      step();
+      turn_left();
+      Hansel1();
+    }
+  }
+  //wel voor een muur
+  else
+  {
+    turn_left();
+    Hansel1();
+  }
+    
+}
 void nieuwe_bal_zoeken ()
 {
     //1e poging
