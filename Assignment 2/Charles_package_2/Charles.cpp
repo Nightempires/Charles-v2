@@ -127,13 +127,15 @@ void putitdown()
 
 void ass_2()
 {
-  begin();
-  while (!in_front_of_wall())
+  if (!in_front_of_wall())
   {
-    putitdown();
+    put_ball();
+    ass_2();
   }
+
   if (in_front_of_wall())
   {
+    put_ball();
     turn_left();
     step();
     if (!on_ball())
@@ -148,9 +150,14 @@ void ass_2()
       step();
       step();
       turn_right();
-      putitown();
+      putitdown();
     }
   }
+}
+void mainfunction()
+{
+  begin();
+  ass_2();
 }
 void Hansel1()
 {
