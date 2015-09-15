@@ -285,6 +285,126 @@ void Opdracht1 ()
         Opdracht1();
     }
 }
+void enter_cave()
+{
+  step();
+  turn_right();
+}
+void djensen()
+{
+  turn_right();
+  djensen();
+}
+void bottom_rows()
+{
+  //while we are not in front of a top wall (we are going up)
+  while (!in_front_of_wall())
+  {
+    //just place a ball and keep on stepping
+    place_ball();
+    step();
+  }
+  //if we hit the top wall
+  if (in_front_of_wall())
+  {
+    //finish the row, prepare for next bottom row
+    place_ball();
+    turn_left();
+    step();
+    //check if we are at the left wall
+    if (in_front_of_wall())
+    {
+      //we are at the left wall
+      //party
+      djensen();
+
+    }
+    //if we are not yet at the left wall
+    if (!in_front_of_wall())
+    {
+      //prepare for the bottom row and start stepping
+      turn_left();
+      while (!in_front_of_wall())
+      {
+        place_ball();
+        step();
+        //then if we hit a wall, we are at the bottom wall
+        if (in_front_of_wall())
+        {
+          //finish the row, prepare for next up row
+          place_ball();
+          turn_right();
+          step();
+          turn_right();
+          bottom_rows();
+        }
+      }
+    }
+  }
+}
+void caveman()
+{
+    //while not in front of a wall
+    while (!in_front_of_wall())
+    {
+      //place a ball and step until charles hits a wall
+      place_ball();
+      step();
+    }
+    //then if in front of the bottom wall, place the final ball and get ready for the next row
+    if (in_front_of_wall())
+    {
+      place_ball();
+      turn_left();
+      step();
+      turn_left();
+      //go up this time, placing balls
+      while (!in_front_of_wall())
+      {
+        place_ball();
+        step();
+      }
+      //then if we hit the top wall
+      if (in_front_of_wall())
+      {
+        //place final ball and get ready for the next (down) rown
+        place_ball();
+        turn_right();
+        step();
+        //but if we hit a wall after turning, we are at the right wall
+        if (in_front_of_wall())
+        {
+          turn_right();
+          while (!in_front_of_wall())
+          {
+            //travel until he hits the bottom wall
+            step();
+          }
+          if (in_front_of_wall())
+          {
+            //we are at the bottom wall
+            turn_right();
+            step();
+            turn_right();
+            //go through row up
+            bottom_rows();
+          }
+
+        }
+        if (!in_front_of_wall())
+        {
+          turn_right();
+          caveman();
+        }
+      }
+    }
+}
+
+void execution()
+{
+  enter_cave();
+  caveman();
+}
 
 // end of part with code to be completed by students
 // =========================================================================
