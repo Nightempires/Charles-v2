@@ -310,38 +310,32 @@ void bottom_rows()
     //do a 180
     put_ball();
     turn_left();
+
+    turn_left();
+    //get back the same way we came
+    while (!in_front_of_wall())
+    {
+      step();
+    }
+    //check if we are at the bottom wall
     if (in_front_of_wall())
     {
-      //we are there
-      djensen();
-    }
-    else
-    {
-      turn_left();
-      //get back the same way we came
-      while (!in_front_of_wall())
-      {
-        step();
-      }
-      //check if we are at the bottom wall
+
+      //we are at the bottom wall
+      //prepare for next row
+      turn_right();
+      step();
       if (in_front_of_wall())
       {
-
-        //we are at the bottom wall
-        //prepare for next row
-        turn_right();
-        if (in_front_of_wall())
-        {
-          //we are there
-          djensen();
-        }
-        else
-        {
-          step();
-          turn_right();
-          bottom_rows();
-        }
+        //we are there
+        djensen();
       }
+      else
+      {
+        turn_right();
+        bottom_rows();
+      }
+      
     }
   }
 }
