@@ -351,26 +351,26 @@ void caveman()
       place_ball();
       step();
     }
-    //then if in front of the bottom wall, place the final ball and get ready for the next row
+    //then if in front of the bottom wall, place final ball and head back
     if (in_front_of_wall())
     {
+      //place final, do a 180
       place_ball();
       turn_left();
-      step();
       turn_left();
       //go up this time, placing balls
       while (!in_front_of_wall())
       {
-        place_ball();
         step();
       }
       //then if we hit the top wall
       if (in_front_of_wall())
       {
         //place final ball and get ready for the next (down) rown
-        place_ball();
         turn_right();
         step();
+        turn_right();
+        caveman();
         //but if we hit a wall after turning, we are at the right wall
         if (in_front_of_wall())
         {
