@@ -301,39 +301,42 @@ void bottom_rows()
   while (!in_front_of_wall())
   {
     //just place a ball and keep on stepping
-    place_ball();
+    put_ball();
     step();
   }
   //if we hit the top wall
   if (in_front_of_wall())
   {
-    //finish the row, prepare for next bottom row
-    place_ball();
+    //do a 180
+    put_ball();
     turn_left();
-    step();
-    //check if we are at the left wall
     if (in_front_of_wall())
     {
-      //we are at the left wall
-      //party
+      //we are there
       djensen();
-
     }
-    //if we are not yet at the left wall
-    if (!in_front_of_wall())
+    else
     {
-      //prepare for the bottom row and start stepping
       turn_left();
+      //get back the same way we came
       while (!in_front_of_wall())
       {
-        place_ball();
         step();
-        //then if we hit a wall, we are at the bottom wall
+      }
+      //check if we are at the bottom wall
+      if (in_front_of_wall())
+      {
+
+        //we are at the bottom wall
+        //prepare for next row
+        turn_right();
         if (in_front_of_wall())
         {
-          //finish the row, prepare for next up row
-          place_ball();
-          turn_right();
+          //we are there
+          djensen();
+        }
+        else
+        {
           step();
           turn_right();
           bottom_rows();
@@ -348,17 +351,17 @@ void caveman()
     while (!in_front_of_wall())
     {
       //place a ball and step until charles hits a wall
-      place_ball();
+      put_ball();
       step();
     }
     //then if in front of the bottom wall, place final ball and head back
     if (in_front_of_wall())
     {
       //place final, do a 180
-      place_ball();
+      put_ball();
       turn_left();
       turn_left();
-      //go up this time, placing balls
+      //go up again in the same row
       while (!in_front_of_wall())
       {
         step();
@@ -366,12 +369,10 @@ void caveman()
       //then if we hit the top wall
       if (in_front_of_wall())
       {
-        //place final ball and get ready for the next (down) rown
+        //go to the next row
         turn_right();
         step();
-        turn_right();
-        caveman();
-        //but if we hit a wall after turning, we are at the right wall
+        //if we find a wall here, we are at the right wall
         if (in_front_of_wall())
         {
           turn_right();
@@ -391,11 +392,8 @@ void caveman()
           }
 
         }
-        if (!in_front_of_wall())
-        {
-          turn_right();
-          caveman();
-        }
+        turn_right();
+        caveman();
       }
     }
 }
